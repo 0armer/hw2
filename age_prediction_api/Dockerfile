@@ -23,8 +23,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # DeepFace 모델 가중치를 미리 다운로드합니다.
 # 더미 이미지를 넘겨 모델 다운로드를 트리거합니다.
 RUN python -c "from deepface import DeepFace; import numpy as np; \
-    try: DeepFace.analyze(np.zeros((224, 224, 3), dtype=np.uint8), actions=['age'], enforce_detection=False) \
-    except Exception: pass"
+    try: DeepFace.analyze(np.zeros(...), ... ) \
+    exception: pass"
 
 # 애플리케이션 코드 복사
 COPY main.py .
