@@ -42,7 +42,7 @@ jobs:
           context: ./age_prediction_api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          # Docker 빌드 캐시를 활용하여 빌드 속도를 개선합니다.
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache,mode=max
+          # labels: ${{ steps.meta.outputs.labels }}
+          # # Docker 빌드 캐시를 활용하여 빌드 속도를 개선합니다.
+          # cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache
+          # cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache,mode=max
