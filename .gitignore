@@ -1,0 +1,17 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# DeepFace downloaded weights (if run locally)
+.deepface/
+weights/
+
+# IDEs
+.vscode/
+.idea/
