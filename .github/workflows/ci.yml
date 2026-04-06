@@ -1,0 +1,48 @@
+name: Build and Push Docker Image CI
+
+# main 브랜치에 코드가 push될 때 워크플로우가 실행됩니다.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'age_prediction_api/**'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. GitHub 저장소 체크아웃
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Docker Hub 로그인 (GitHub Secrets 활용)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 3. Docker 이미지 메타데이터(태그 등) 설정
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+
+      # 4. Docker 이미지 빌드 및 푸시
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./age_prediction_api
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Docker 빌드 캐시를 활용하여 빌드 속도를 개선합니다.
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/age-prediction-api:buildcache,mode=max
