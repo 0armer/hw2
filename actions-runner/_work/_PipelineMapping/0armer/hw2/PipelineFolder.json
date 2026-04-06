@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "0armer/hw2",
+  "pipelineDirectory": "hw2",
+  "workspaceDirectory": "hw2\\hw2",
+  "repositories": {
+    "0armer/hw2": {
+      "repositoryPath": "hw2\\hw2",
+      "lastRunOn": "04/07/2026 02:35:01 +09:00"
+    }
+  },
+  "lastRunOn": "04/07/2026 02:39:56 +09:00"
+}
