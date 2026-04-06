@@ -3,16 +3,16 @@ FROM python:3.10-slim
 
 # 작업 디렉토리 설정
 WORKDIR /app
+# 1. 저장소 주소를 더 안정적인 곳으로 변경 (강력 추천)
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list || true
 
-# OpenCV 및 관련 시스템 의존성 설치 (-y 및 --no-install-recommends로 최적화, 캐시 지우기)
-# 1. 캐시를 삭제하고 업데이트를 시도합니다.
+# 2. 다시 업데이트 및 설치 시도
 RUN apt-get clean && \
     apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
-
 # 요구사항 파일 복사 (의존성이 변경되지 않은 경우 Docker 캐시를 활용하기 위해 먼저 복사)
 COPY requirements.txt .
 
