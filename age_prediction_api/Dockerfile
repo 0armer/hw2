@@ -1,6 +1,5 @@
 # Python 3.10 slim 버전을 사용하여 기본 이미지 크기를 최소화합니다
-FROM python:3.10-slim
-
+FROM python:3.10-bookworm
 # 작업 디렉토리 설정
 WORKDIR /app
 # 1. 저장소 주소를 더 안정적인 곳으로 변경 (강력 추천)
