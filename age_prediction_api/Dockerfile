@@ -23,7 +23,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # DeepFace 모델 가중치를 미리 다운로드합니다.
 # 더미 이미지를 넘겨 모델 다운로드를 트리거합니다.
 # 한 줄로 쭉 이어서 작성합니다. except 철자를 확인하세요!
-RUN python -c "from deepface import DeepFace; import numpy as np; try: DeepFace.analyze(np.zeros((224, 224, 3), dtype=np.uint8), actions=['age'], enforce_detection=False); print('Model loaded!') except Exception: pass"
+# 세미콜론(;)을 사용하여 들여쓰기 문제를 원천 차단합니다.
+RUN python -c "from deepface import DeepFace; import numpy as np; try: DeepFace.analyze(np.zeros((224, 224, 3), dtype=np.uint8), actions=['age'], enforce_detection=False)"
 
 # 애플리케이션 코드 복사
 COPY main.py .
