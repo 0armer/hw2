@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "한준희",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus22.actions.githubusercontent.com/3Ic9KsRcTJnpzZHjb18MrNaaA6xgPqRXX5TmcH75x1cWN89e8o/",
+  "gitHubUrl": "https://github.com/0armer/hw2",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
