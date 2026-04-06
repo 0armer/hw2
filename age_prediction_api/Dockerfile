@@ -5,7 +5,10 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # OpenCV 및 관련 시스템 의존성 설치 (-y 및 --no-install-recommends로 최적화, 캐시 지우기)
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# 1. 캐시를 삭제하고 업데이트를 시도합니다.
+RUN apt-get clean && \
+    apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
@@ -21,8 +24,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # DeepFace 모델 가중치를 미리 다운로드합니다.
 # 더미 이미지를 넘겨 모델 다운로드를 트리거합니다.
 RUN python -c "from deepface import DeepFace; import numpy as np; \
-try: DeepFace.analyze(np.zeros((224, 224, 3), dtype=np.uint8), actions=['age'], enforce_detection=False) \
-except Exception: pass"
+    try: DeepFace.analyze(np.zeros((224, 224, 3), dtype=np.uint8), actions=['age'], enforce_detection=False) \
+    except Exception: pass"
 
 # 애플리케이션 코드 복사
 COPY main.py .
